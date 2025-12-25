@@ -1,5 +1,6 @@
 package com.example.expense_tracker.model;
 
+import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,7 @@ import jakarta.persistence.ManyToMany;
 
 
 @Entity
+@Table(name = "people")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

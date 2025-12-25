@@ -1,5 +1,6 @@
 package com.example.expense_tracker.model;
 
+import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,9 +12,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany; 
 import jakarta.persistence.JoinTable; 
 import java.util.HashSet;              
-import java.util.Set;              
+import java.util.Set; 
+import java.math.BigDecimal;
+
 
 @Entity 
+@Table(name = "expenses")
 public class Expense {
     
     @Id
@@ -23,7 +27,7 @@ public class Expense {
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
-    private double amount;
+    private BigDecimal amount;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "paid_by_person_id")
@@ -41,7 +45,7 @@ public class Expense {
 
     }
 
-    public Expense(String description, double amount, Person paidBy){
+    public Expense(String description, BigDecimal amount, Person paidBy){
         this.description = description;
         this.amount = amount;
         this.paidBy = paidBy;
@@ -64,11 +68,11 @@ public class Expense {
         this.description = description;
     }
 
-    public double getAmount(){
+    public BigDecimal getAmount(){
         return amount;
     }
 
-    public void setAmount(double amount){
+    public void setAmount(BigDecimal amount){
         this.amount = amount;
     }
 
