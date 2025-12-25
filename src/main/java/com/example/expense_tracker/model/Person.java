@@ -10,6 +10,7 @@ import jakarta.persistence.Column;
 import java.util.HashSet;          
 import java.util.Set;            
 import jakarta.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore; 
 
 
 @Entity
@@ -22,6 +23,7 @@ public class Person {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "participants")
     private Set<Expense> expensesParticipatingIn = new HashSet<>();
 

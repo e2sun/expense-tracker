@@ -12,10 +12,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/people")
 @CrossOrigin(origins = "http://localhost:4200")
-public class PeopleController {
+public class PersonController {
     private final PersonRepository personRepository;
 
-    public PeopleController(PersonRepository personRepository){
+    public PersonController(PersonRepository personRepository){
         this.personRepository = personRepository;
     }
 
