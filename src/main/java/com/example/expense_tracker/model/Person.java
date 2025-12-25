@@ -5,8 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+
+import java.util.HashSet;          
+import java.util.Set;            
+import jakarta.persistence.ManyToMany;
+
 
 @Entity
 public class Person {
@@ -14,8 +17,11 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
+
+    @ManyToMany(mappedBy = "participants")
+    private Set<Expense> expensesParticipatingIn = new HashSet<>();
 
     public Person(){
 
@@ -38,8 +44,12 @@ public class Person {
         return name;
     }
 
-    public String setName(String name){
+    public void setName(String name){
         this.name = name;
+    }
+
+    public Set<Expense> getExpensesParticipatingIn(){
+        return expensesParticipatingIn;
     }
 
 }

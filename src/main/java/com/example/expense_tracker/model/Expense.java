@@ -5,6 +5,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+
+import jakarta.persistence.ManyToMany; 
+import jakarta.persistence.JoinTable; 
+import java.util.HashSet;              
+import java.util.Set;              
 
 @Entity 
 public class Expense {
@@ -17,11 +24,18 @@ public class Expense {
     private String description;
     @Column(nullable = false)
     private double amount;
-    @Column(nullable = false)
 
-    @ManyToOne
-    @JoinColumn(name="person_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "paid_by_person_id")
     private Person paidBy;
+
+    @ManyToMany
+    @JoinTable(
+        name = "expense_participants",
+        joinColumns = @JoinColumn(name = "expense_id"),
+        inverseJoinColumns = @JoinColumn(name = "person_id")
+    )
+    private Set<Person> participants = new HashSet<>();
 
     public Expense(){
 
@@ -42,11 +56,19 @@ public class Expense {
         this.id = id;
     }
 
+    public String getDescription(){
+        return description;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
     public double getAmount(){
         return amount;
     }
 
-    public setAmount(double amount){
+    public void setAmount(double amount){
         this.amount = amount;
     }
 
@@ -54,8 +76,16 @@ public class Expense {
         return paidBy;
     }
 
-    public Person setPaidBy(Person paidBy){
+    public void setPaidBy(Person paidBy){
         this.paidBy = paidBy;
+    }
+
+    public Set<Person> getParticipants() { 
+        return participants;
+    }
+
+    public void setParticipants(Set<Person> participants) { // ✅ ADD
+        this.participants = participants;
     }
 
 }
