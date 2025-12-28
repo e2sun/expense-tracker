@@ -88,7 +88,7 @@ public class Expense {
         return participants;
     }
 
-    public void setParticipants(Set<Person> participants) { // ✅ ADD
+    public void setParticipants(Set<Person> participants) { 
         this.participants = participants;
     }
 
